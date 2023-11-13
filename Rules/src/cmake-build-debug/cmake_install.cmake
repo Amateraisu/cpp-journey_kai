@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/admin/CLionProjects/cpppracticejourney/Rules/src
+# Install script for directory: C:/Users/admin/CLionProjects/cpppracticejourney/cpp-journey_kai/Rules/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -45,5 +45,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/admin/CLionProjects/cpppracticejourney/Rules/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/admin/CLionProjects/cpppracticejourney/cpp-journey_kai/Rules/src/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

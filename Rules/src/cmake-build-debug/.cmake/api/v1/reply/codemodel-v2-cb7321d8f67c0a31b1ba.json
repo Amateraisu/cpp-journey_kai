@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/Users/admin/CLionProjects/cpppracticejourney/Rules/src/cmake-build-debug",
-		"source" : "C:/Users/admin/CLionProjects/cpppracticejourney/Rules/src"
+		"build" : "C:/Users/admin/CLionProjects/cpppracticejourney/cpp-journey_kai/Rules/src/cmake-build-debug",
+		"source" : "C:/Users/admin/CLionProjects/cpppracticejourney/cpp-journey_kai/Rules/src"
 	},
 	"version" : 
 	{
