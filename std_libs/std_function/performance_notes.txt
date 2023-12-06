@@ -1,0 +1,7 @@
+- std::function has performance loss compared to a functor created directly
+- std::function prevents inline optimizations, that which the compiler can optimize with lambdas.
+- Dynamically allocated memory for captured variables:
+--for std::functions assigned to lambdas with captures, heap based memory is used to capture the captures.
+Memory costs, along with cache misses which comes with heap-based allocation.
+-std::function is just a wrapper around functions and lambdas so we can be flexible and assign one to another.
+-std::function is NOT a lambda, not a function pointer.
