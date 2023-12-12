@@ -24,7 +24,25 @@ public:
     }
 };
 
+// classic type erasure
+
+int use_func(const std::function<int(int, int)>& f) {
+    return f(2, 3);
+}
+
 //tldr it is a method to find the correct downcast for a ptr at runtime
+void use_base(const base& obj) {
+    // now we cant use dynamic runtime type erasure
+
+
+}
+
+void break_your_assumptions() {
+    struct myDerived: base{};
+    use_base(myDerived{});
+}
+
+
 
 int main() {
     d1 child;
@@ -37,3 +55,5 @@ int main() {
     }
     return 0;
 }
+
+
