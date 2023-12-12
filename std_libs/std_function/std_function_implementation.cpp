@@ -1,25 +1,35 @@
 #include <bits/stdc++.h>
-#include <memory>
-template<typename T>
-class function;
 
-template<typename Ret, typename ... Param>
-class function<Ret(Param...)>{
+template <typename T>
+class func;
 
+template <typename Ret, typename ... Params>
+class func<Ret (Params...)> {
 public:
-    function(Ret (*f)(Param...));
-    Ret operator () (Param... param) {
-        return callable->call(param...);
+    func(Ret (*f)(Params...)): callable{std::make_unique<callable_impl<decltype(f)>>(f)} {}
+
+    Ret operator () (Params ... args) {
+        return callable->call(args...);
     }
+    
 private:
-    struct function_interface {
-        virtual Ret call(Param...) = 0;
-        virtual ~function_interface() = default;
+    struct callable_interface {
+        callable_interface() = default;
+        virtual ~callable_interface();
+        virtual Ret call(Params...) = 0;
     };
-
-    std::unique_ptr<function_interface>callable;
-
+    template <typename T>
+    struct callable_impl : callable_interface {
+        T callable;
+        callable_impl(T f):callable{std::move(f)}{}
+        Ret call(Params... args) {
+            return callable(args...);
+        }
+    };
+    std::unique_ptr<callable_interface>callable;
 };
+
+
 
 int f(int x, int y) {
     return x + y;
@@ -27,5 +37,9 @@ int f(int x, int y) {
 
 
 int main() {
-    function<int(int, int)>func{f};
+    func<int (int, int)>ptr = &f;
+    ptr(1, 2);
 }
+
+
+
