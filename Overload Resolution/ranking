@@ -1,0 +1,6 @@
+1. exact match
+2. Binding to an l value and passing it in is also an exact match
+3. qualifiers, which refers to const
+4. integral promotions
+5. elipsis
+6. conversions
