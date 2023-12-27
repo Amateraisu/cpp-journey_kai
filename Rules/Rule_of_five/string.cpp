@@ -51,7 +51,7 @@ public:
         rhs.ptr_ = nullptr;
 
     }
-    // move assignement
+    // move assignement // 5th rule ?
     String& operator = (String&& rhs) {
         capacity_ = rhs.capacity_;
         rhs.capacity_ = 0;
@@ -73,7 +73,7 @@ public:
         }
         return *this;
     }
-    // 5th rule ?
+
 
 
 
