@@ -4,7 +4,7 @@
 //
 
 class Unique_ptr {
-    
+
 };
 
 
