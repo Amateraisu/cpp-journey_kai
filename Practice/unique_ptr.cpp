@@ -20,7 +20,7 @@ struct Unique_ptr {
     Unique_ptr& operator = (const Unique_ptr<T>& other) = delete;
 
     Unique_ptr& operator = (Unique_ptr<T>&& other) {
-        if (this != other) {
+        if (this != &other) {
             ptr = other.ptr;
             delete other.ptr;
             other.ptr = nullptr;
