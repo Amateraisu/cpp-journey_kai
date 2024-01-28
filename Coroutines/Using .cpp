@@ -2,15 +2,12 @@
 // Created by admin on 17/11/2023.
 //
 #include <bits/stdc++.h>
-#include "coro.hpp"
+#include "corotask.hpp"
 
-int main() {
-
-
-    auto coroTask = coro(3);
-    std::cout << "Coro() started!\n";
-    while (coroTask.resume()) {
-        std::cout << "coro() suspended\n";
+void coro(int max) {
+    std::cout << "CORO " << max << " start\n";
+    for (int i = 1; i <= max; ++i) {
+        std::cout << "CORO " << i << '/' << max << '\n';
     }
-    std::cout << "coro() ended!\n";
+    std::cout << "CORO" << max << " END" << '\n';
 }
