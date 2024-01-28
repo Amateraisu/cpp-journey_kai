@@ -25,7 +25,7 @@ struct any {
     void (*destroy_) (void* data);
 
     template <typename T>
-    explicit any(T&& value):data_(new T{std::forward<T>(value)}), getType_{[]()->std::type_info const& {return typeid(T);}}, clone_([](void* otherData) -> void* {return new T(*static_cast<T*>(otherData));}), destroy_([](void* data_){ delete static_cast<T*>(data_);}){}
+    explicit any(T&& value):data_(new T{std::forward<T>(value)}), getType_{[]()->std::type_info const& {return typeid(T);}}, clone_([](void* otherData) -> void* {return new T{*static_cast<T*>(otherData)};}), destroy_([](void* data_){ delete static_cast<T*>(data_);}){}
 
     any(any const& other)
             : data_(other.clone_(other.data_))
@@ -48,8 +48,8 @@ struct any {
 
 
 int main() {
-    // any a(50);
-    // // but this naive implementation cannot handle copy constructors and will result in a double delete.
-    // any b = a; // this is doomed.
+     any a(50);
+     // but this naive implementation cannot handle copy constructors and will result in a double delete.
+     any b = a; // this is doomed.
     return 0;
 }
