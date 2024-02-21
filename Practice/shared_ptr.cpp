@@ -15,8 +15,8 @@ struct my_shared_ptr {
     my_shared_ptr():cnt_ptr{nullptr}, ptr{nullptr}{}
     my_shared_ptr(T* ptr_):ptr{ptr_}, cnt_ptr{new int(0)} {}
     my_shared_ptr(my_shared_ptr<T>& other) {
-        cnt_ptr = other->cnt_ptr;
-        ptr = other->ptr;
+        cnt_ptr = other.cnt_ptr;
+        ptr = other.ptr;
         increment();
         if (other->cnt_ptr == nullptr) {other.cnt_ptr = cnt_ptr;}
     }
