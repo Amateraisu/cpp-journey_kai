@@ -56,6 +56,7 @@ int main() {
     customFunc<int(int, int)> f2{foo};
     int testVal = f2(4, 6);
     std::cout << testVal << '\n'; // should print out 10!
+    assert(f2(4, 6) == f(4, 6));
     return 0; // now we actually need to do something with the callables.
 }
 

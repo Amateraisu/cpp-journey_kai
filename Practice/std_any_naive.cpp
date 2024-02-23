@@ -27,13 +27,12 @@ struct actual_any {
     const std::type_info& (*getType)();
     void* (*clone)(void* otherData);
     void (*destroy)(void* data);
-
-
     template<typename T>
-    explicit actual_any(T&& value):data_{new T{std::forward<T>(value)}}, getType{
-            []()->const std::type_info& { return typeid(T);}}, clone{[](void* otherData)->void*{return new T{*static_cast<T*>(otherData)};}},
+    explicit actual_any(T&& value):data_{new T{std::forward<T>(value)}},
+    getType{
+            []()->const std::type_info& { return typeid(T);}},
+            clone{[](void* otherData)->void*{return new T{*static_cast<T*>(otherData)};}},
             destroy{[](void* data_)mutable ->void{delete static_cast<T*>(data_);}}{}
-
     };
 
 
