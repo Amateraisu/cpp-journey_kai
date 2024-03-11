@@ -1,52 +1,39 @@
 #include <bits/stdc++.h>
+#include <sys/mman.h>
 #include <unistd.h>
-
 using word_t = intptr_t;
 
 struct Block {
-    int size;
+    size_t size;
     bool used;
+
     Block* next;
-    word_t* data; // payload ptr;
+
+    word_t* data;
 };
 
-static Block *heapStart = nullptr;
-
+static Block* heapStart = nullptr;
 static auto top = heapStart;
 
-inline size_t align(size_t n) {
-    return (n + sizeof(word_t) - 1) & ~(sizeof(word_t) - 1);
-}
-
-
-inline size_t allocSize(size_t size) {
-    return size + sizeof(Block) - sizeof(std::declval<Block>().data);
+size_t align(size_t size) {
+    return (size + sizeof(word_t) - 1) & ~(sizeof(word_t) - 1);
 }
 
 Block* requestFromOS(size_t size) {
-    auto block = (Block *) sbrk(0);
+    auto sizeOfPage = sysconf(_SC_PAGESIZE);
 
-    if (sbrk(allocSize(size)) == (void*)-1) {
+    size_t numberOfPages = (size + sizeOfPage - 1)/sizeOfPage;
+    void* ptr = mmap(NULL, numberOfPages, PROT_READ | PROT_WRITE, MAP_PRIVATE | MAP_ANONYMOUS, -1, 0);
+    if (ptr == MAP_FAILED) {
         return nullptr;
     }
 
-    return block;
+    return (Block*)ptr;
 }
 
 word_t* alloc(size_t size) {
     size = align(size);
-    auto block = requestFromOS(size);
-    block->size = size;
-    block->used = true;
-    if (heapStart == nullptr) {
-        heapStart = block;
-    }
-    if (top != nullptr) {
-        top->next = block;
-    }
-    top = block;
-
-    return block->data;
+    // so we need this amount of size of memory
 
 }
 
