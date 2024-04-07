@@ -38,9 +38,11 @@ namespace {
  */
 
 // Your code goes here:
+template <int... I>
+struct Vector{};
 // ^ Your code goes here
 
-// static_assert(std::is_same_v<Vector<1,2>, Vector<1,2>>);
+ static_assert(std::is_same_v<Vector<1,2>, Vector<1,2>>);
 
 
 /**
@@ -50,6 +52,20 @@ namespace {
  */
 
 // Your code goes here:
+template <int I, int... Is>
+void print() {
+    std::cout << I << ' ';
+}
+
+template <int I>
+void print() {
+    std::cout << I << '\n';
+}
+
+template <>
+void print() {
+
+}
 // ^ Your code goes here
 
 
@@ -249,8 +265,8 @@ namespace {
 
 int main()
 {
-//     print(Vector<>{});
-//     print(Vector<1>{});
-//     print(Vector<1,2,3,4,5,6>{});
+     print(Vector<>{});
+     print(Vector<1>{});
+     print(Vector<1,2,3,4,5,6>{});
 //     std::cout << typeid(Vector<1,2,3,4,5,6>{}).name() << '\n';
 }
